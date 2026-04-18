@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+int main() {
+    float marks[5], total = 0, percentage;
+    int i, pass = 1;
+
+    // 1. Input marks for five courses
+    printf("Enter marks for 5 courses (out of 100):\n");
+    for(i = 0; i < 5; i++) {
+        printf("Course %d: ", i + 1);
+        scanf("%f", &marks[i]);
+        
+        // Check if the student failed any single course
+        if(marks[i] < 40) {
+            pass = 0;
+        }
+        total += marks[i];
+    }
+
+    // 2. Determine Result and Division
+    if(pass) {
+        percentage = (total / 500) * 100;
+        printf("\nResult: PASS");
+        printf("\nAggregate Percentage: %.2f%%", percentage);
+        printf("\nDivision: ");
+
+        if(percentage >= 75) {
+            printf("Distinction");
+        } else if(percentage >= 60) {
+            printf("1st Division");
+        } else if(percentage >= 50) {
+            printf("2nd Division");
+        } else {
+            printf("3rd Division");
+        }
+    } else {
+        printf("\nResult: FAIL");
+        printf("\nReason: Scored less than 40 in one or more courses.");
+    }
+
+    return 0;
+}
