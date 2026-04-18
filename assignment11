@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <math.h> // For sqrt()
+
+int main() {
+    int n, i, isPrime = 1;
+    long long factorial = 1;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Error: Factorial and prime calculations require a non-negative integer.\n");
+        return 1;
+    }
+
+    // a) Square root
+    printf("\na) Square root: %.2f", sqrt(n));
+
+    // b) Square
+    printf("\nb) Square: %d", n * n);
+
+    // c) Cube
+    printf("\nc) Cube: %d", n * n * n);
+
+    // d) Prime Check
+    if (n == 0 || n == 1) isPrime = 0;
+    for (i = 2; i <= sqrt(n); ++i) {
+        if (n % i == 0) {
+            isPrime = 0;
+            break;
+        }
+    }
+    if (isPrime)
+        printf("\nd) %d is a Prime number.", n);
+    else
+        printf("\nd) %d is not a Prime number.", n);
+
+    // e) Factorial
+    for (i = 1; i <= n; ++i) {
+        factorial *= i;
+    }
+    printf("\ne) Factorial: %lld", factorial);
+
+    // f) Prime Factors
+    printf("\nf) Prime factors: ");
+    int temp = n;
+    if (temp < 2) printf("None");
+    for (i = 2; temp > 1; i++) {
+        while (temp % i == 0) {
+            printf("%d ", i);
+            temp /= i;
+        }
+    }
+    printf("\n");
+
+    return 0;
+}
