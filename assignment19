@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+struct DATE {
+    int day;
+    int month;
+    int year;
+};
+
+struct EMPLOYEE {
+    char name[50];
+    char designation[30];
+    char gender;
+    struct DATE doj;
+    float salary;
+};
+void inputEmployee(struct EMPLOYEE *emp);
+void displayEmployee(struct EMPLOYEE emp);
+float computeAnnualSalary(float monthlySalary);
+
+int main() {
+    int n, i;
+    printf("Enter number of employees: ");
+    scanf("%d", &n);
+
+    struct EMPLOYEE employees[n];
+
+    for (i = 0; i < n; i++) {
+        printf("\nEnter details for employee %d:\n", i + 1);
+        inputEmployee(&employees[i]);
+    }
+
+    printf("\n--- Employee Database ---\n");
+    for (i = 0; i < n; i++) {
+        displayEmployee(employees[i]);
+        printf("Computed Annual Salary: %.2f\n", computeAnnualSalary(employees[i].salary));
+        printf("--------------------------\n");
+    }
+
+    return 0;
+}
+
+void inputEmployee(struct EMPLOYEE *emp) {
+    printf("Name: ");
+    scanf(" %[^\n]", emp->name); // Reads string with spaces
+    printf("Designation: ");
+    scanf(" %[^\n]", emp->designation);
+    printf("Gender (M/F/O): ");
+    scanf(" %c", &emp->gender);
+    printf("Date of Joining (DD MM YYYY): ");
+    scanf("%d %d %d", &emp->doj.day, &emp->doj.month, &emp->doj.year);
+    printf("Monthly Salary: ");
+    scanf("%f", &emp->salary);
+}
+void displayEmployee(struct EMPLOYEE emp) {
+    printf("Name: %s\n", emp.name);
+    printf("Designation: %s\n", emp.designation);
+    printf("Gender: %c\n", emp.gender);
+    printf("Joining Date: %02d/%02d/%d\n", emp.doj.day, emp.doj.month, emp.doj.year);
+    printf("Monthly Salary: %.2f\n", emp.salary);
+}
+
+float computeAnnualSalary(float monthlySalary) {
+    return monthlySalary * 12;
+}
