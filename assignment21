@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h> 
+
+int main() {
+    FILE *source_ptr, *dest_ptr;
+    char source_name[100], dest_name[100];
+    int ch;
+
+    printf("Enter the name of the source file to read: ");
+    scanf("%s", source_name);
+
+    source_ptr = fopen(source_name, "r");
+    if (source_ptr == NULL) {
+        printf("Error: Cannot open source file %s\n", source_name);
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Enter the name of the destination file to write: ");
+    scanf("%s", dest_name);
+
+    dest_ptr = fopen(dest_name, "w");
+    if (dest_ptr == NULL) {
+        printf("Error: Cannot open destination file %s\n", dest_name);
+        fclose(source_ptr); // Close the already opened source file
+        exit(EXIT_FAILURE);
+    }
+
+    while ((ch = fgetc(source_ptr)) != EOF) {
+        fputc(ch, dest_ptr);
+    }
+
+    printf("File copied successfully to %s\n", dest_name);
+
+    fclose(source_ptr);
+    fclose(dest_ptr);
+
+    return 0;
+}
