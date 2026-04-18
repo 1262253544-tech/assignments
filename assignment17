@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int n, i;
+    float x, degree, term, sum;
+
+    printf("Enter the angle in degrees: ");
+    scanf("%f", &degree);
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
+
+    x = degree * (3.14159 / 180.0);
+
+    term = x;
+    sum = x;
+
+    for (i = 1; i < n; i++) {
+        term = -term * x * x / ((2 * i) * (2 * i + 1));
+        sum += term;
+    }
+
+    printf("Sum of the sine series: %f\n", sum);
+    printf("Actual sin(%0.2f) using math.h: %f\n", degree, sin(x));
+
+    return 0;
+}
